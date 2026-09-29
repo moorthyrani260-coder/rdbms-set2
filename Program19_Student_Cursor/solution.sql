@@ -1,26 +1,15 @@
-USE CollegeDB;
-
-DROP PROCEDURE IF EXISTS DisplayStudents;
-
-DELIMITER $$
-
-CREATE PROCEDURE DisplayStudents()
+CREATE OR REPLACE FUNCTION count_students(
+    p_department IN VARCHAR2
+)
+RETURN NUMBER
+IS
+    v_count NUMBER;
 BEGIN
+    SELECT COUNT(*)
+    INTO v_count
+    FROM Student
+    WHERE department = p_department;
 
-    -- Declare variables
-
-    -- Declare cursor
-
-    -- Declare NOT FOUND handler
-
-    -- Open cursor
-
-    -- Fetch records using a loop
-
-    -- Close cursor
-
-END $$
-
-DELIMITER ;
-
-CALL DisplayStudents();
+    RETURN v_count;
+END;
+/
