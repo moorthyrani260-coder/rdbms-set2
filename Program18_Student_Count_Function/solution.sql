@@ -1,15 +1,15 @@
-CREATE OR REPLACE PROCEDURE insert_student(
-    p_student_id   IN NUMBER,
-    p_student_name IN VARCHAR2,
-    p_marks        IN NUMBER
+CREATE OR REPLACE FUNCTION count_students(
+    p_department IN VARCHAR2
 )
+RETURN NUMBER
 IS
+    v_count NUMBER;
 BEGIN
-    INSERT INTO Student (student_id, student_name, marks)
-    VALUES (p_student_id, p_student_name, p_marks);
+    SELECT COUNT(*)
+    INTO v_count
+    FROM Student
+    WHERE department = p_department;
 
-    COMMIT;
-
-    DBMS_OUTPUT.PUT_LINE('Student record inserted successfully.');
+    RETURN v_count;
 END;
 /
